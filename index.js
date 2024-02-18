@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
 
-app.use('/users',userRoutes);
+app.use('/users',userRoutes.router);
 app.use(mainRoutes);
 app.use((req, res, next) =>{
   res.sendFile(path.join(__dirname,'views','404.html'))

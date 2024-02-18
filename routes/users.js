@@ -1,21 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
-const path = require('path')
+const path = require("path");
+
+const users = [];
 
 router.get("/add-users", (req, res) => {
-  res.sendFile(path.join(__dirname,'..','views','add-users.html'));
-});
-
-router.get("/delete-users", (req, res) => {
-  res.send(`
-    <h1>Delete users</h1>
-  `);
+  res.sendFile(path.join(__dirname, "..", "views", "add-users.html"));
 });
 
 router.post("/users", (req, res) => {
   console.log(req.body);
+  users.push({ username: req.body.username, age: req.body.age });
   res.redirect("/");
 });
 
-module.exports = router;
+exports.router = router;
+exports.users = users;
