@@ -1,29 +1,17 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title #{title}
-    link(rel="stylesheet" href="/css/main.css")
-  body 
-    header.header
-      nav.header-nav
-        ul.header-item-list
-          li.header-item
-            a(href="/") Bosh sahifa
-          li.header-item
-            a(href="/users/add-users") Add users  
-
-    //- main
-    main 
-      h1 Users list
-      if users.length > 0
-        each user in users
-          div.card
-            img(src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%")
-            .container 
-              h4 
-                b #{user.username}
-              p Age: #{user.age}
-      else 
-        p There is no users
+extends layouts/main-layout
+block styles 
+  link(rel="stylesheet", href="/css/main.css")
+block content
+  //- main
+  main 
+    h1 Users list
+    if users.length > 0
+      each user in users
+        div.card
+          img(src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%")
+          .container 
+            h4 
+              b #{user.username}
+            p Age: #{user.age}
+    else 
+      p There is no users
