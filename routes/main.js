@@ -7,8 +7,9 @@ const users = require("./users")
 
 router.get('/', (req, res) => {
   console.log(users.users)
+  res.render('main')
   // res.sendFile('../views')
-  res.sendFile(path.join(__dirname, '..','views','main.html'));
+  // res.sendFile(path.join(__dirname, '..','views','main.html'));
 })
 
 

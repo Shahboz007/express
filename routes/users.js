@@ -6,7 +6,7 @@ const path = require("path");
 const users = [];
 
 router.get("/add-users", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "add-users.html"));
+  res.render('add-users',{title: 'Add new user'});
 });
 
 router.post("/users", (req, res) => {
