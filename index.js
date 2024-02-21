@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-// const { engine } = require("express-handlebars");
+const { engine } = require("express-handlebars");
 
 const app = express();
 
@@ -8,11 +8,11 @@ const app = express();
 // app.set("view engine", "pug");
 
 // HANDLE BARS
-// app.engine(".hbs", engine({ extname: ".hbs" }));
-// app.set("view engine", ".hbs");
+app.engine(".hbs", engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
 
 // EJS
-app.set('view engine', 'ejs')
+// app.set('view engine', 'ejs')
 
 // for all engine
 app.set("views", "views");
