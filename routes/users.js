@@ -1,19 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const {getAddUsersPage, addNewUser} = require('../controllers/users')
+ 
 
-const path = require("path");
+router.get("/add-users", getAddUsersPage);
 
-const users = [];
-
-router.get("/add-users", (req, res) => {
-  res.render('add-users',{title: 'Add new user'});
-});
-
-router.post("/users", (req, res) => {
-  console.log(req.body);
-  users.push({ username: req.body.username, age: req.body.age });
-  res.redirect("/");
-});
+router.post("/users", addNewUser);
 
 exports.router = router;
-exports.users = users;
