@@ -71,7 +71,8 @@ img {
   font: inherit;
 }
 
-button {
+.btn {
+  text-decoration: none;
   border: 1px solid green;
   color: green;
   background: white;
