@@ -8,7 +8,6 @@ const getMainPage = async (req, res) => {
   try {
     const users = await pool.query("SELECT * FROM user_info");
 
-    console.log(users.rows);
     res.render("main", {
       title: "Users list",
       users: users.rows,
@@ -25,7 +24,7 @@ const getUserPageByUid = async (req, res) => {
   try {
     const user = await pool.query("SELECT * FROM user_info WHERE id = $1", [
       req.params.id,
-    ]); 
+    ]);
 
     res.render("user-page", {
       title: user.rows[0].username,
