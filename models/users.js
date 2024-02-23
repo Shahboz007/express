@@ -1,40 +1,39 @@
-const fs = require("fs");
-const path = require("path");
-
-const pathToFile = path.join(__dirname, "../data/users.json");
+const pool = require("../config/db");
 
 module.exports = class User {
-    constructor(uid, username, age) {
-        this.username = username;
-        this.age = age;
-        this.uid = uid;
-    }
+  constructor(username, age) {
+    this.username = username;
+    this.age = age;
+  }
 
-    save() {
-        let users = [];
+  save() {
+    let users = [];
 
-        fs.readFile(pathToFile, "utf8", (err, data) => {
-            if (err) throw err;
-            users = JSON.parse(data);
-            users.push({
-                username: this.username,
-                age: this.age,
-                uid: this.uid,
-            });
+    fs.readFile(pathToFile, "utf8", (err, data) => {
+      if (err) throw err;
+      users = JSON.parse(data);
+      users.push({
+        username: this.username,
+        age: this.age,
+        uid: this.uid,
+      });
 
-            fs.writeFile(pathToFile, JSON.stringify(users), (err) => {
-                if (err) throw err;
-            });
-        });
-    }
+      fs.writeFile(pathToFile, JSON.stringify(users), (err) => {
+        if (err) throw err;
+      });
+    });
+  }
 
-    static findAll() {
-        const data = () => fs.readFileSync(pathToFile, "utf8");
-        return JSON.parse(data());
-    }
+  static async findAll() {
+    const users = await pool.query("SELECT * FROM user_info");
+    return users.rows;
+  }
 
-    static findByUid(uid) {
-        const data = () => fs.readFileSync(pathToFile, "utf8");
-        return JSON.parse(data()).find((item) => item.uid === uid);
-    }
+  static async findByUid(id) {
+    const user = await pool.query("SELECT * FROM user_info WHERE id = $1", [
+      id,
+    ]);
+
+    return user.rows[0]
+  }
 };
