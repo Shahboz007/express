@@ -18,5 +18,9 @@ module.exports = class User {
   static findAll(){
     return users;
   }
+
+  static findByUid(uid){
+    return  users.find(item => item.uid === uid)
+  }
   
 };

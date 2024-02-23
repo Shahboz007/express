@@ -1,16 +1,12 @@
 <main>
-  <h1>Users list</h1> 
-  {{#if users}}
-  {{#each users}}
+  {{#if user}}
   <div class="card">
     <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
     <div class="container">
-      <h4><b>{{username}}</b></h4>
-      <p>Age: {{age}}</p>
-      <a class="btn" href="/{{uid}}">More info...</a>
+      <h4>Name: <b>{{user.username}}</b></h4>
+      <p>Age: {{user.age}}</p>
     </div>
   </div>
-  {{/each}}
   {{else}}
     <p>Userlarni barcha listi...</p>
   {{/if}}
