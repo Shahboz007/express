@@ -35,4 +35,8 @@ module.exports = class User {
       [username, age, id]
     );
   }
+
+  static async findByIdAndDelete(id){
+    await pool.query("DELETE FROM user_info WHERE id = $1", [id]);
+  }
 };

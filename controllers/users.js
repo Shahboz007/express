@@ -64,7 +64,7 @@ const updateUser = async (req, res) => {
 // Descr     delete user
 const deleteUser = async (req, res) => {
   try {
-    await pool.query("DELETE FROM user_info WHERE id = $1", [req.params.id]);
+    await User.findByIdAndDelete(req.params.id)
 
     res.redirect("/");
   } catch (error) {
