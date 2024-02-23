@@ -17,7 +17,7 @@ const getAddUsersPage = (req, res) => {
 const addNewUser = async (req, res) => {
   try {
     const newUser = await new User(req.body.username, req.body.age);
-    newUser.save()
+    newUser.save();
     res.redirect("/");
   } catch (error) {
     console.log(error);
@@ -47,9 +47,10 @@ const updatePageUser = async (req, res) => {
 // Descr     edit user
 const updateUser = async (req, res) => {
   try {
-    await pool.query(
-      "UPDATE user_info SET username = $1, age = $2 WHERE id = $3",
-      [req.body.username, req.body.age, req.params.id]
+    await User.findByIdAndUpdate(
+      req.params.id,
+      req.body.username,
+      req.body.age
     );
 
     res.redirect("/");

@@ -28,4 +28,11 @@ module.exports = class User {
 
     return user.rows[0];
   }
+
+  static async findByIdAndUpdate(id, username,age) {
+    await pool.query(
+      "UPDATE user_info SET username = $1, age = $2 WHERE id = $3",
+      [username, age, id]
+    );
+  }
 };
