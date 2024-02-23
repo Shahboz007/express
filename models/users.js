@@ -6,22 +6,14 @@ module.exports = class User {
     this.age = age;
   }
 
-  save() {
-    let users = [];
-
-    fs.readFile(pathToFile, "utf8", (err, data) => {
-      if (err) throw err;
-      users = JSON.parse(data);
-      users.push({
-        username: this.username,
-        age: this.age,
-        uid: this.uid,
-      });
-
-      fs.writeFile(pathToFile, JSON.stringify(users), (err) => {
-        if (err) throw err;
-      });
-    });
+  async save() {
+    await pool.query(
+      `
+              INSERT INTO user_info (username, age) 
+              VALUES ($1, $2) RETURNING *
+          `,
+      [this.username, this.age]
+    );
   }
 
   static async findAll() {
@@ -34,6 +26,6 @@ module.exports = class User {
       id,
     ]);
 
-    return user.rows[0]
+    return user.rows[0];
   }
 };

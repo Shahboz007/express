@@ -16,14 +16,8 @@ const getAddUsersPage = (req, res) => {
 // Descr     add new user
 const addNewUser = async (req, res) => {
   try {
-    await pool.query(
-      `
-            INSERT INTO user_info (username, age) 
-            VALUES ($1, $2) RETURNING *
-        `,
-      [req.body.username, req.body.age]
-    );
-
+    const newUser = await new User(req.body.username, req.body.age);
+    newUser.save()
     res.redirect("/");
   } catch (error) {
     console.log(error);
