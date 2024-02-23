@@ -53,8 +53,23 @@ const updatePageUser = async (req, res) => {
 // Descr     edit user
 const updateUser = async (req, res) => {
   try {
-    await pool.query('UPDATE user_info SET username = $1, age = $2 WHERE id = $3',
-    [req.body.username, req.body.age, req.params.id])
+    await pool.query(
+      "UPDATE user_info SET username = $1, age = $2 WHERE id = $3",
+      [req.body.username, req.body.age, req.params.id]
+    );
+
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Route     /users/delete/:id
+// Method    DELETE
+// Descr     delete user
+const deleteUser = async (req, res) => {
+  try {
+    await pool.query("DELETE FROM user_info WHERE id = $1", [req.params.id]);
 
     res.redirect("/");
   } catch (error) {
@@ -67,4 +82,5 @@ module.exports = {
   addNewUser,
   updatePageUser,
   updateUser,
+  deleteUser,
 };
