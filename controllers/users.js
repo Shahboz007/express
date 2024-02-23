@@ -16,9 +16,8 @@ const getAddUsersPage = (req, res) => {
 // Method    POST
 // Descr     add new user
 const addNewUser = (req, res) => {
-    const uid = uuid.v4()
-    console.log(uid)
-  
+    const uid = uuid.v4();
+
     const users = new User(uid, req.body.username, req.body.age);
     users.save();
     res.redirect("/");
